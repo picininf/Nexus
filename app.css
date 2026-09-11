@@ -1222,4 +1222,320 @@ a:focus-visible, button:focus-visible, input:focus-visible {
     max-height: 220px !important;
   }
 
+}/* =========================================================
+   MOBILE — CORREÇÃO REAL DO SIDEBAR
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .app-shell {
+        display: block !important;
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+
+    /* SIDEBAR DEIXA DE SER LATERAL */
+    .sidebar {
+        position: sticky !important;
+        top: 0 !important;
+        left: 0 !important;
+
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center;
+
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        z-index: 1000;
+
+        border-right: 0 !important;
+        border-bottom: 1px solid var(--line-soft);
+    }
+
+    /* Esconde a parte inferior do sidebar */
+    .sidebar-user,
+    .sidebar-footer {
+        display: none !important;
+    }
+
+    /* Área dos links */
+    .sidebar-nav {
+        width: 100%;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center;
+
+        gap: 6px;
+
+        padding: 8px 12px;
+
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        scrollbar-width: none;
+    }
+
+    .sidebar-nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Links */
+    .sidebar-nav a,
+    .sidebar-nav button {
+        flex: 0 0 auto;
+
+        white-space: nowrap;
+
+        padding: 10px 13px !important;
+
+        font-size: 13px !important;
+
+        border-radius: 9px;
+    }
+
+    /* Conteúdo PRINCIPAL ocupa a tela inteira */
+    .main-scroll {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+
+        height: auto !important;
+
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
+    }
+
+    /* TOPBAR */
+    .app-topbar {
+        width: 100% !important;
+        box-sizing: border-box;
+
+        padding: 14px 16px !important;
+
+        gap: 10px;
+    }
+
+    /* CONTEÚDO */
+    .app-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box;
+
+        padding: 18px 14px 40px !important;
+    }
+
+    /* KPIs */
+    .kpi-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
+    }
+
+    .kpi-card {
+        min-width: 0 !important;
+        padding: 15px !important;
+    }
+
+    /* DUAS COLUNAS */
+    .two-col {
+        grid-template-columns: 1fr !important;
+        width: 100% !important;
+    }
+
+    /* CARDS */
+    .card {
+        width: 100%;
+        box-sizing: border-box;
+
+        padding: 16px !important;
+
+        overflow: hidden;
+    }
+
+    /* TÍTULOS */
+    .card-head {
+        gap: 8px;
+    }
+
+    .card-head h2 {
+        font-size: 17px !important;
+        line-height: 1.25;
+    }
+
+    .card-head p {
+        font-size: 12px !important;
+        line-height: 1.4;
+    }
+
+    /* GRÁFICOS */
+    .chart-container-usage {
+        height: 250px !important;
+        min-height: 250px !important;
+    }
+
+    .chart-container-status {
+        height: 200px !important;
+        min-height: 200px !important;
+    }
+
+    .chart-container-economia {
+        height: 170px !important;
+        min-height: 170px !important;
+    }
+
+    /* TABELAS NÃO PODEM ESTOURAR A PÁGINA */
+    .table-wrap {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* EQUIPAMENTOS */
+    .eq-list {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    .eq-row {
+        min-width: 620px;
+    }
+
+    /* HUB */
+    .hub-list {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    /* FORMULÁRIOS */
+    .inline-form {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch !important;
+    }
+
+    .inline-form input,
+    .inline-form select,
+    .inline-form button {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* CONFIGURAÇÕES */
+    .settings-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* BOTÕES */
+    button,
+    .btn {
+        min-height: 42px;
+    }
+}
+
+
+/* =========================================================
+   CELULAR PEQUENO
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .sidebar-nav {
+        padding: 7px 10px;
+        gap: 5px;
+    }
+
+    .sidebar-nav a,
+    .sidebar-nav button {
+        padding: 9px 11px !important;
+        font-size: 12px !important;
+    }
+
+    .app-topbar {
+        padding: 12px 14px !important;
+    }
+
+    .app-content {
+        padding: 14px 10px 30px !important;
+    }
+
+    .kpi-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px !important;
+    }
+
+    .kpi-card {
+        padding: 12px !important;
+    }
+
+    .card {
+        padding: 13px !important;
+        margin-bottom: 14px !important;
+        border-radius: 12px;
+    }
+
+    .chart-container-usage {
+        height: 230px !important;
+        min-height: 230px !important;
+    }
+
+    .chart-container-status {
+        height: 185px !important;
+        min-height: 185px !important;
+    }
+
+    .chart-container-economia {
+        height: 155px !important;
+        min-height: 155px !important;
+    }
+}
+
+
+/* =========================================================
+   CELULAR MUITO PEQUENO
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .app-content {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+
+    .kpi-grid {
+        gap: 6px !important;
+    }
+
+    .kpi-card {
+        padding: 10px !important;
+    }
+
+    .chart-container-usage {
+        height: 215px !important;
+        min-height: 215px !important;
+    }
+
+    .chart-container-status {
+        height: 175px !important;
+        min-height: 175px !important;
+    }
+
+    .chart-container-economia {
+        height: 145px !important;
+        min-height: 145px !important;
+    }
 }
