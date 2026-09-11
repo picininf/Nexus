@@ -125,14 +125,14 @@
   function requireAuth() {
     const userId = getSession();
     if (!userId) {
-      window.location.href = "login.html";
+      window.location.href = "index.html";
       return null;
     }
     const db = loadDB();
     const user = db.users.find((u) => u.id === userId);
     if (!user || !db.accounts[userId]) {
       logout();
-      window.location.href = "login.html";
+      window.location.href = "index.html";
       return null;
     }
     return userId;
