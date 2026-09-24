@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Criar conta — Nexus Fitness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<div class="auth-shell">
+
+  <div class="auth-side">
+    <div class="auth-logo">
+      <svg viewBox="0 0 24 24" width="20" height="20"><path d="M3 17L9 9L13 14L21 4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="21" cy="4" r="2.2" fill="currentColor"/></svg>
+      <span>NEXUS<em>FITNESS</em></span>
+    </div>
+
+    <div class="auth-pitch">
+      <h2>Comece a proteger o caixa da sua academia hoje.</h2>
+      <p>Crie sua conta e já entre com dados de exemplo carregados — pronto para explorar o painel.</p>
+      <div class="auth-feature-list">
+        <div class="auth-feature"><span class="dot"></span><span>Sem cartão de crédito — plano piloto gratuito</span></div>
+        <div class="auth-feature"><span class="dot"></span><span>Leva menos de 1 minuto para configurar</span></div>
+        <div class="auth-feature"><span class="dot"></span><span>Seus dados ficam salvos neste navegador</span></div>
+      </div>
+    </div>
+
+    <blockquote class="auth-quote">
+      "Consertar depois da quebra custa de 3 a 5 vezes mais do que a manutenção preventiva."
+    </blockquote>
+  </div>
+
+  <div class="auth-form-col">
+    <form class="auth-form" id="signup-form" novalidate>
+      <h1>Criar sua conta</h1>
+      <p class="sub">Configure o painel da sua academia em segundos.</p>
+
+      <div class="form-error" id="form-error"></div>
+
+      <div class="field">
+        <label for="nome">Seu nome</label>
+        <input type="text" id="nome" placeholder="Ex: Ana Ribeiro" autocomplete="name">
+      </div>
+      <div class="field">
+        <label for="academia">Nome da academia</label>
+        <input type="text" id="academia" placeholder="Ex: PowerFit Academia" autocomplete="organization">
+      </div>
+      <div class="field">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" placeholder="voce@academia.com.br" autocomplete="email">
+      </div>
+      <div class="field">
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
+      </div>
+      <div class="field">
+        <label for="senha2">Confirmar senha</label>
+        <input type="password" id="senha2" placeholder="Repita a senha" autocomplete="new-password">
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">Criar conta e acessar painel</button>
+
+      <p class="auth-foot">Já tem conta? <a href="index.html">Entrar</a></p>
+     
+    </form>
+  </div>
+
+</div>
+
+<script src="auth.js"></script>
+<script>
+  const form = document.getElementById("signup-form");
+  const errorBox = document.getElementById("form-error");
+
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.classList.add("show");
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    errorBox.classList.remove("show");
+
+    const nome = document.getElementById("nome").value.trim();
+    const academia = document.getElementById("academia").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const senha = document.getElementById("senha").value;
+    const senha2 = document.getElementById("senha2").value;
+
+    if (!nome || !academia || !email || !senha) {
+      showError("Preencha todos os campos.");
+      return;
+    }
+    if (senha.length < 6) {
+      showError("A senha precisa ter pelo menos 6 caracteres.");
+      return;
+    }
+    if (senha !== senha2) {
+      showError("As senhas não coincidem.");
+      return;
+    }
+
+    try {
+      NexusAuth.signup({ nome, academia, email, senha });
+      window.location.href = "dashboard.html";
+    } catch (err) {
+      showError(err.message);
+    }
+  });
+</script>
+</body>
+</html>

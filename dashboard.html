@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel — Nexus Fitness</title>
+<meta name="description" content="Painel de manutenção preditiva e compras coletivas para academias.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <svg viewBox="0 0 24 24" width="19" height="19"><path d="M3 17L9 9L13 14L21 4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="21" cy="4" r="2.2" fill="currentColor"/></svg>
+      <span>NEXUS<em>FITNESS</em></span>
+    </div>
+
+    <nav class="sidebar-nav" id="sidebar-nav">
+      <div class="nav-item active" data-view="visao-geral">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.7"/><rect x="13" y="3" width="8" height="5" rx="1" stroke="currentColor" stroke-width="1.7"/><rect x="13" y="10" width="8" height="11" rx="1" stroke="currentColor" stroke-width="1.7"/><rect x="3" y="13" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.7"/></svg>
+        <span>Visão geral</span>
+      </div>
+      <div class="nav-item" data-view="manutencao">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.7"/><path d="M12 8v4l3 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        <span>Manutenção preditiva</span>
+        <span class="nav-badge" id="badge-alertas" hidden>0</span>
+      </div>
+      <div class="nav-item" data-view="hub">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="8" cy="19" r="2" fill="currentColor"/><circle cx="18" cy="19" r="2" fill="currentColor"/><path d="M2 4h3l3 12h11l3-8.5H7" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linejoin="round"/></svg>
+        <span>Hub de suprimentos</span>
+      </div>
+      <div class="nav-item" data-view="equipamentos">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="7" width="18" height="10" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M7 7V5a2 2 0 012-2h6a2 2 0 012 2v2" stroke="currentColor" stroke-width="1.7"/></svg>
+        <span>Equipamentos</span>
+      </div>
+      <div class="nav-item" data-view="roi">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 19h16M7 16v-5M12 16V6M17 16v-8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        <span>Calculadora de ROI</span>
+      </div>
+      <div class="nav-item" data-view="configuracoes">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/><path d="M19 12a7 7 0 00-.13-1.36l2.03-1.58-2-3.46-2.39.96a7.03 7.03 0 00-2.35-1.36L13.8 3h-3.6l-.36 2.2a7.03 7.03 0 00-2.35 1.36l-2.39-.96-2 3.46 2.03 1.58A7 7 0 005 12c0 .46.05.91.13 1.36l-2.03 1.58 2 3.46 2.39-.96c.69.58 1.49 1.04 2.35 1.36L10.2 21h3.6l.36-2.2a7.03 7.03 0 002.35-1.36l2.39.96 2-3.46-2.03-1.58c.08-.45.13-.9.13-1.36z" stroke="currentColor" stroke-width="1.3" fill="none"/></svg>
+        <span>Configurações</span>
+      </div>
+    </nav>
+
+    <div class="sidebar-user">
+      <div>
+        <div class="sidebar-user-name" id="sidebar-user-name">—</div>
+        <div class="sidebar-user-academia" id="sidebar-user-academia">—</div>
+      </div>
+      <button class="btn btn-ghost btn-sm btn-block" id="logout-btn">Sair</button>
+    </div>
+  </aside>
+
+  <div class="main-scroll">
+
+    <div class="app-topbar">
+      <div>
+        <h1 id="topbar-title">Visão geral</h1>
+        <p class="app-topbar-sub" id="topbar-sub">Resumo da operação em tempo real</p>
+      </div>
+      <div class="topbar-actions">
+        <select id="unit-select" class="unit-select" aria-label="Unidade"></select>
+        <button class="bell-btn" id="bell-btn" aria-label="Abrir central de notificações">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 17V11a6 6 0 1112 0v6l2 2H4l2-2zM10 21h4" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+          <span class="bell-count" id="bell-count" hidden>0</span>
+        </button>
+        <div class="plan-chip" id="topbar-plan">Piloto — Feira de Ciências</div>
+      </div>
+    </div>
+
+    <div class="app-content">
+
+      <!-- ===================== VISÃO GERAL ===================== -->
+     <!-- ===================== VISÃO GERAL ===================== -->
+<section class="view-section active" id="view-visao-geral">
+
+  <div id="critical-banner"></div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Equipamentos monitorados</div>
+      <div class="kpi-value" id="kpi-equip-total">0</div>
+      <div class="kpi-note">frota ativa no painel</div>
+    </div>
+
+    <div class="kpi-card">
+      <div class="kpi-label">Alertas ativos</div>
+      <div class="kpi-value amber" id="kpi-alertas">0</div>
+      <div class="kpi-note">aguardando revisão preventiva</div>
+    </div>
+
+    <div class="kpi-card">
+      <div class="kpi-label">Economia acumulada</div>
+      <div class="kpi-value teal" id="kpi-economia">R$ 0</div>
+      <div class="kpi-note">consertos emergenciais evitados</div>
+    </div>
+
+    <div class="kpi-card">
+      <div class="kpi-label">Desconto atual do hub</div>
+      <div class="kpi-value teal" id="kpi-desconto">0%</div>
+      <div class="kpi-note" id="kpi-desconto-note">
+        — academias no pedido coletivo
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===================== GRÁFICOS PRINCIPAIS ===================== -->
+
+  <div class="two-col">
+
+    <!-- GRÁFICO DE USO -->
+    <div class="card chart-card">
+
+      <div class="card-head">
+        <div>
+          <h2>Uso estimado por equipamento</h2>
+          <p>
+            Quanto mais perto do topo, mais próximo da revisão preventiva
+          </p>
+        </div>
+      </div>
+
+      <div class="chart-container chart-container-usage">
+        <canvas id="chart-uso"></canvas>
+      </div>
+
+    </div>
+
+
+    <!-- GRÁFICO DE STATUS -->
+    <div class="card chart-card">
+
+      <div class="card-head">
+        <div>
+          <h2>Status da frota</h2>
+          <p>Proporção de equipamentos em alerta</p>
+        </div>
+      </div>
+
+      <div class="chart-container chart-container-status">
+        <canvas id="chart-status"></canvas>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ===================== GRÁFICO DE ECONOMIA ===================== -->
+
+  <div class="card chart-card">
+
+    <div class="card-head">
+      <div>
+        <h2>Economia por ciclo de compra</h2>
+        <p>
+          Valor economizado em cada pedido coletivo registrado no hub
+        </p>
+      </div>
+    </div>
+
+    <div class="chart-container chart-container-economia">
+      <canvas id="chart-economia"></canvas>
+    </div>
+
+  </div>
+
+
+  <!-- ===================== ALERTAS / HUB ===================== -->
+
+  <div class="two-col">
+
+    <div class="card">
+
+      <div class="card-head">
+        <div>
+          <h2>Alertas de manutenção</h2>
+          <p>
+            Equipamentos que atingiram a zona de revisão preventiva
+          </p>
+        </div>
+
+        <button
+          class="btn btn-ghost btn-sm"
+          data-goto="manutencao">
+          Ver módulo completo
+        </button>
+      </div>
+
+      <div
+        class="alert-list"
+        id="overview-alert-list">
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="card-head">
+        <div>
+          <h2>Hub de suprimentos</h2>
+          <p>Pedido coletivo deste mês</p>
+        </div>
+
+        <button
+          class="btn btn-ghost btn-sm"
+          data-goto="hub">
+          Ver módulo completo
+        </button>
+      </div>
+
+      <p style="font-size:0.85rem; margin-bottom:14px;">
+        Sua academia está agrupada com outras
+        <strong
+          id="overview-hub-count"
+          style="color:var(--text-primary)">
+          —
+        </strong>
+        unidades neste ciclo de compra.
+      </p>
+
+      <div class="hub-discount-summary">
+
+        <div
+          class="kpi-value teal"
+          id="overview-hub-discount"
+          style="font-size:1.8rem;">
+          0%
+        </div>
+
+        <p style="font-size:0.82rem;">
+          de economia média nos insumos deste mês
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+      <!-- ===================== MANUTENÇÃO PREDITIVA ===================== -->
+      <section class="view-section" id="view-manutencao">
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2>Frota monitorada</h2>
+              <p>Simule o avanço de uso semanal e observe o algoritmo agendar revisões preventivas automaticamente.</p>
+            </div>
+          </div>
+
+          <div class="eq-row eq-head">
+            <span>Equipamento</span>
+            <span class="col-tipo">Tipo</span>
+            <span>Uso estimado</span>
+            <span>Status</span>
+            <span class="col-revisao">Última revisão</span>
+            <span></span>
+          </div>
+          <div id="eq-list"></div>
+        </div>
+      </section>
+
+      <!-- ===================== HUB DE SUPRIMENTOS ===================== -->
+      <section class="view-section" id="view-hub">
+        <div class="two-col">
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <h2>Pedido coletivo deste mês</h2>
+                <p>Ajuste quantas academias entram no hub e veja o preço de atacado se formar</p>
+              </div>
+            </div>
+
+            <div class="hub-slider-block">
+              <label for="hub-slider">Academias participando do pedido coletivo</label>
+              <input type="range" id="hub-slider" min="1" max="40" value="12" step="1">
+              <div class="hub-slider-value"><span id="hub-count">12</span> academias no ciclo atual</div>
+            </div>
+
+            <div class="card-head" style="margin-bottom:10px;">
+              <div>
+                <h2 style="font-size:0.95rem;">Insumos do pedido</h2>
+                <p>Edite preços ou adicione novos itens à lista de compra coletiva</p>
+              </div>
+              <button class="btn btn-primary btn-sm" id="toggle-add-insumo">+ Adicionar insumo</button>
+            </div>
+
+            <form class="inline-form" id="add-insumo-form">
+              <input type="text" id="new-insumo-nome" placeholder="Nome do insumo" required>
+              <input type="number" id="new-insumo-varejo" placeholder="Preço de varejo (R$)" min="0" step="1" required>
+              <button type="submit" class="btn btn-primary btn-sm">Adicionar</button>
+            </form>
+
+            <div class="insumo-row insumo-head">
+              <span>Insumo</span>
+              <span>Varejo</span>
+              <span>Preço no hub</span>
+              <span>Economia</span>
+              <span></span>
+            </div>
+            <div id="insumo-list"></div>
+
+            <div style="margin-top:18px; display:flex; gap:12px;">
+              <button class="btn btn-primary btn-sm" id="registrar-pedido-btn">Registrar pedido deste mês</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <h2>Histórico de pedidos</h2>
+                <p>Últimos ciclos de compra coletiva</p>
+              </div>
+            </div>
+            <div id="hub-history"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== EQUIPAMENTOS (CRUD) ===================== -->
+      <section class="view-section" id="view-equipamentos">
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2>Cadastro de equipamentos</h2>
+              <p>Adicione ou remova aparelhos monitorados pelo painel</p>
+            </div>
+            <button class="btn btn-primary btn-sm" id="toggle-add-eq">+ Adicionar equipamento</button>
+          </div>
+
+          <form class="inline-form" id="add-eq-form">
+            <input type="text" id="new-eq-nome" placeholder="Nome do equipamento" required>
+            <input type="text" id="new-eq-tipo" placeholder="Tipo (ex: Cardio, Força)" required>
+            <button type="submit" class="btn btn-primary btn-sm">Adicionar</button>
+          </form>
+
+          <div class="eq-row eq-head">
+            <span>Equipamento</span>
+            <span class="col-tipo">Tipo</span>
+            <span>Uso estimado</span>
+            <span>Status</span>
+            <span class="col-revisao">Última revisão</span>
+            <span></span>
+          </div>
+          <div id="eq-crud-list"></div>
+        </div>
+      </section>
+
+      <!-- ===================== CALCULADORA DE ROI ===================== -->
+      <section class="view-section" id="view-roi">
+        <div class="two-col">
+          <div class="card">
+            <div class="card-head"><div><h2>Simule a economia da sua rede</h2><p>Informe o tamanho da operação e veja a projeção em 6 e 12 meses</p></div></div>
+            <div class="field"><label for="roi-eq">Equipamentos por academia</label><input type="number" id="roi-eq" min="1" value="40"></div>
+            <div class="field"><label for="roi-ac">Número de academias</label><input type="number" id="roi-ac" min="1" value="3"></div>
+            <div class="field"><label for="roi-gasto">Compra mensal de insumos por academia (R$)</label><input type="number" id="roi-gasto" min="0" value="4000"></div>
+            <p class="roi-note">Premissas ilustrativas: 0,6 quebras por equipamento ao ano; conserto de emergência de R$ 1.800; revisão preventiva custa 1/4 disso (o conserto reativo custa de 3 a 5 vezes mais); compra coletiva reduz 20% do gasto com insumos (faixa de 15% a 30%).</p>
+          </div>
+          <div class="card">
+            <div class="card-head"><div><h2>Projeção de economia</h2><p>Manutenção preventiva somada à compra coletiva</p></div></div>
+            <div class="roi-result">
+              <div><div class="kpi-label">Em 6 meses</div><div class="kpi-value teal" id="roi-6">R$ 0</div></div>
+              <div><div class="kpi-label">Em 12 meses</div><div class="kpi-value teal" id="roi-12">R$ 0</div></div>
+            </div>
+            <div class="history-item"><span>Manutenção preventiva (12 meses)</span><span class="econ" id="roi-manut">R$ 0</span></div>
+            <div class="history-item"><span>Compra coletiva (12 meses)</span><span class="econ" id="roi-compra">R$ 0</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== CONFIGURAÇÕES ===================== -->
+      <section class="view-section" id="view-configuracoes">
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2>Perfil da academia</h2>
+              <p>Informações usadas em todo o painel</p>
+            </div>
+          </div>
+          <form class="settings-grid" id="settings-form">
+            <div class="field">
+              <label for="cfg-academia">Nome da academia</label>
+              <input type="text" id="cfg-academia">
+            </div>
+            <div class="field">
+              <label for="cfg-nome">Seu nome</label>
+              <input type="text" id="cfg-nome">
+            </div>
+            <div class="field">
+              <label for="cfg-email">E-mail</label>
+              <input type="email" id="cfg-email" disabled>
+            </div>
+            <div class="field">
+              <label>Plano atual</label>
+              <div class="plan-chip" id="cfg-plano">Piloto — Feira de Ciências</div>
+            </div>
+          </form>
+          <button class="btn btn-primary btn-sm" id="save-settings-btn">Salvar alterações</button>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2>Zona de risco</h2>
+              <p>Ações irreversíveis nesta conta de demonstração</p>
+            </div>
+          </div>
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <button class="btn btn-danger btn-sm" id="reset-data-btn">Restaurar dados de demonstração</button>
+            <button class="btn btn-ghost btn-sm" id="logout-btn-2">Sair da conta</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<div class="notif-overlay" id="notif-overlay" hidden></div>
+<aside class="notif-drawer" id="notif-drawer" aria-label="Central de notificações" aria-hidden="true">
+  <div class="notif-head">
+    <h2>Notificações</h2>
+    <div><button class="btn btn-ghost btn-sm" id="notif-read">Marcar como lidas</button><button class="btn btn-ghost btn-sm" id="notif-close" aria-label="Fechar">✕</button></div>
+  </div>
+  <div id="notif-list"></div>
+</aside>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="auth.js"></script>
+<script src="dashboard.js"></script>
+</body>
+</html>
