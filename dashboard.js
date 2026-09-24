@@ -11,6 +11,14 @@
 
   const ALERT_THRESHOLD = 75;
 
+  function fmtPct(n) {
+    return n.toLocaleString("pt-BR", { maximumFractionDigits: 1 }) + "%";
+  }
+
+  function formatBRLc(n) {
+    return n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+  }
+
   function formatBRL(n) {
     return "R$ " + Math.round(n).toLocaleString("pt-BR");
   }
@@ -273,6 +281,17 @@
      SIDEBAR / USUÁRIO
      ========================================================== */
 
+  navItems.forEach((item) => {
+    item.setAttribute("role", "button");
+    item.tabIndex = 0;
+    item.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        goToView(item.dataset.view);
+      }
+    });
+  });
+
   function renderUserChrome() {
     const data = current();
 
@@ -321,7 +340,7 @@
     const discount = discountForCount(n);
 
     document.getElementById("kpi-desconto").textContent =
-      discount.toFixed(0) + "%";
+      fmtPct(discount);
 
     document.getElementById("kpi-desconto-note").textContent =
       n + " academias no pedido coletivo";
@@ -373,7 +392,7 @@
     document.getElementById(
       "overview-hub-discount"
     ).textContent =
-      discount.toFixed(0) + "%";
+      fmtPct(discount);
 
     renderCritical(account);
     updateCharts(account);
@@ -439,6 +458,9 @@
   function initCharts() {
     if (typeof Chart === "undefined") {
       console.warn("Chart.js não foi carregado.");
+      document.querySelectorAll(".chart-container").forEach((el) => {
+        el.innerHTML = '<div class="alert-empty">Não foi possível carregar os gráficos. Verifique sua conexão.</div>';
+      });
       return;
     }
 
@@ -931,6 +953,16 @@
      RENDERIZAÇÃO GERAL
      ========================================================== */
 
+  /* Atualização periódica: não toca em Hub/Configurações para não apagar o que o usuário está digitando */
+  function renderLive() {
+    ensureSchema();
+    renderUnits();
+    renderNotifs();
+    renderOverview();
+    renderManutencao();
+    renderEquipamentosCRUD();
+  }
+
   function renderAll() {
     ensureSchema();
     renderUserChrome();
@@ -970,6 +1002,8 @@
     const action = btn.dataset.action;
 
     const id = btn.dataset.id;
+
+    if (action === "remove" && !confirm("Remover este equipamento da frota monitorada?")) return;
 
     NexusAuth.updateAccount(
       userId,
@@ -1075,17 +1109,17 @@
           <input
             type="number"
             min="0"
-            step="1"
+            step="0.01"
             class="insumo-edit-input"
             data-field="varejo"
             value="${item.varejo}">
 
           <span class="insumo-price-hub">
-            ${formatBRL(hubPrice)}
+            ${formatBRLc(hubPrice)}
           </span>
 
           <span class="insumo-econ">
-            -${formatBRL(economia)}
+            -${formatBRLc(economia)}
           </span>
 
           <span class="insumo-actions">
@@ -1120,15 +1154,15 @@
 
         <span
           style="color:var(--text-tertiary)">
-          ${formatBRL(item.varejo)}
+          ${formatBRLc(item.varejo)}
         </span>
 
         <span class="insumo-price-hub">
-          ${formatBRL(hubPrice)}
+          ${formatBRLc(hubPrice)}
         </span>
 
         <span class="insumo-econ">
-          -${formatBRL(economia)}
+          -${formatBRLc(economia)}
         </span>
 
         <span class="insumo-actions">
@@ -1226,6 +1260,17 @@
     .addEventListener(
       "click",
       () => {
+        const cur = current().account;
+        if (!cur.hub.insumos.length) {
+          showToast("Adicione ao menos um insumo antes de registrar o pedido.");
+          return;
+        }
+        if (
+          cur.hub.historico.some((h) => h.data === todayBR()) &&
+          !confirm("Já existe um pedido registrado hoje. Registrar outro mesmo assim?")
+        ) {
+          return;
+        }
         NexusAuth.updateAccount(
           userId,
           (account) => {
@@ -1579,6 +1624,7 @@
             .value.trim();
 
         if (!nome || !tipo) {
+          showToast("Informe o nome e o tipo do equipamento.");
           return;
         }
 
@@ -1680,6 +1726,7 @@
           !novaAcademia ||
           !novoNome
         ) {
+          showToast("Preencha o nome da academia e o seu nome.");
           return;
         }
 
@@ -1736,6 +1783,11 @@
       }
     );
 
+  document.getElementById("settings-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    document.getElementById("save-settings-btn").click();
+  });
+
   /* ==========================================================
      LOGOUT
      ========================================================== */
@@ -1774,6 +1826,7 @@
      ========================================================== */
 
   setInterval(() => {
+    if (document.hidden) return;
     NexusAuth.updateAccount(
       userId,
       (account) => {
@@ -1804,6 +1857,6 @@
       }
     );
 
-    renderAll();
+    renderLive();
   }, 4000);
 })();

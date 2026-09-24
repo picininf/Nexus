@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 17L9 9L13 14L21 4' stroke='%2335B891' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <title>Painel — Nexus Fitness</title>
 <meta name="description" content="Painel de manutenção preditiva e compras coletivas para academias.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -258,6 +259,7 @@
             </div>
           </div>
 
+          <div class="table-wrap">
           <div class="eq-row eq-head">
             <span>Equipamento</span>
             <span class="col-tipo">Tipo</span>
@@ -267,6 +269,7 @@
             <span></span>
           </div>
           <div id="eq-list"></div>
+          </div>
         </div>
       </section>
 
@@ -297,10 +300,11 @@
 
             <form class="inline-form" id="add-insumo-form">
               <input type="text" id="new-insumo-nome" placeholder="Nome do insumo" required>
-              <input type="number" id="new-insumo-varejo" placeholder="Preço de varejo (R$)" min="0" step="1" required>
+              <input type="number" id="new-insumo-varejo" placeholder="Preço de varejo (R$)" min="0" step="0.01" required>
               <button type="submit" class="btn btn-primary btn-sm">Adicionar</button>
             </form>
 
+            <div class="table-wrap">
             <div class="insumo-row insumo-head">
               <span>Insumo</span>
               <span>Varejo</span>
@@ -309,6 +313,7 @@
               <span></span>
             </div>
             <div id="insumo-list"></div>
+            </div>
 
             <div style="margin-top:18px; display:flex; gap:12px;">
               <button class="btn btn-primary btn-sm" id="registrar-pedido-btn">Registrar pedido deste mês</button>
@@ -344,6 +349,7 @@
             <button type="submit" class="btn btn-primary btn-sm">Adicionar</button>
           </form>
 
+          <div class="table-wrap">
           <div class="eq-row eq-head">
             <span>Equipamento</span>
             <span class="col-tipo">Tipo</span>
@@ -353,6 +359,7 @@
             <span></span>
           </div>
           <div id="eq-crud-list"></div>
+          </div>
         </div>
       </section>
 
@@ -435,9 +442,9 @@
   <div id="notif-list"></div>
 </aside>
 
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script src="auth.js"></script>
 <script src="dashboard.js"></script>
 </body>

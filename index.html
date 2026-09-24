@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 17L9 9L13 14L21 4' stroke='%2335B891' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <title>Entrar — Nexus Fitness</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,7 +40,7 @@
       <h1>Bem-vindo de volta</h1>
       <p class="sub">Entre com sua conta para acessar o painel.</p>
 
-      <div class="form-error" id="form-error"></div>
+      <div class="form-error" id="form-error" role="alert"></div>
 
       <div class="field">
         <label for="email">E-mail</label>
@@ -64,6 +65,7 @@
 </div>
 
 <script src="auth.js"></script>
+<script>NexusAuth.redirectIfAuthenticated();</script>
 <script>
   const form = document.getElementById("login-form");
   const errorBox = document.getElementById("form-error");
@@ -91,8 +93,12 @@
   });
 
   document.getElementById("demo-btn").addEventListener("click", function () {
-    NexusAuth.loginDemo();
-    window.location.href = "dashboard.html";
+    try {
+      NexusAuth.loginDemo();
+      window.location.href = "dashboard.html";
+    } catch (err) {
+      showError(err.message);
+    }
   });
 </script>
 </body>

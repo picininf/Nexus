@@ -28,7 +28,11 @@
   }
 
   function saveDB(db) {
-    localStorage.setItem(DB_KEY, JSON.stringify(db));
+    try {
+      localStorage.setItem(DB_KEY, JSON.stringify(db));
+    } catch (e) {
+      throw new Error("Não foi possível salvar os dados neste navegador (armazenamento indisponível).");
+    }
   }
 
   function seedAccountData(academiaNome) {
@@ -70,6 +74,9 @@
     }
     if (senha.length < 6) {
       throw new Error("A senha precisa ter pelo menos 6 caracteres.");
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      throw new Error("Informe um e-mail válido.");
     }
     if (db.users.some((u) => u.email === email)) {
       throw new Error("Já existe uma conta cadastrada com esse e-mail.");
@@ -120,6 +127,11 @@
   }
   function logout() {
     localStorage.removeItem(SESSION_KEY);
+  }
+
+  function redirectIfAuthenticated() {
+    const cur = getCurrent();
+    if (cur && cur.account) window.location.href = "dashboard.html";
   }
 
   function requireAuth() {
@@ -177,6 +189,7 @@
     loginDemo,
     logout,
     requireAuth,
+    redirectIfAuthenticated,
     getCurrent,
     updateAccount,
     updateUser,
