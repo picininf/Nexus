@@ -31,8 +31,83 @@
     try {
       localStorage.setItem(DB_KEY, JSON.stringify(db));
     } catch (e) {
-      throw new Error("Não foi possível salvar os dados neste navegador (armazenamento indisponível).");
+      console.warn("Não foi possível salvar no navegador:", e);
     }
+  }
+
+  /* Datas relativas a hoje, para a demonstração sempre ter alertas reais */
+  function daysAgo(n) {
+    const d = new Date();
+    d.setDate(d.getDate() - n);
+    return d.toISOString().slice(0, 10);
+  }
+
+  /* ----------------------------------------------------------
+     CAPEX Guard — dados de exemplo
+     Intervalos inspirados em manuais de fabricantes; ajuste
+     sempre pelo manual do seu modelo.
+     ---------------------------------------------------------- */
+  function seedCapex() {
+    const m1 = uid("mq"), m2 = uid("mq"), m3 = uid("mq"), m4 = uid("mq"), m5 = uid("mq"), m6 = uid("mq");
+    const maquinas = [
+      { id: m1, nome: "Esteira Movement LX 160", tipo: "Esteira", marca: "Movement", modelo: "LX 160", serie: "MV-160-0921",
+        dataCompra: daysAgo(760), valorPago: 28900, vidaUtilAnos: 8, garantiaMeses: 24, modoUso: "contador", fatorUso: 0.7,
+        leituras: [{ data: daysAgo(30), horas: 3870 }, { data: daysAgo(2), horas: 4120 }], avaria: false },
+      { id: m2, nome: "Leg Press Pro", tipo: "Musculação", marca: "Nexus Strength", modelo: "LP-45 Pro", serie: "",
+        dataCompra: daysAgo(420), valorPago: 14500, vidaUtilAnos: 10, garantiaMeses: 12, modoUso: "estimado", fatorUso: 0.45,
+        leituras: [], avaria: false },
+      { id: m3, nome: "Esteira 02", tipo: "Esteira", marca: "Movement", modelo: "RT 250", serie: "MV-250-1188",
+        dataCompra: daysAgo(1100), valorPago: 21400, vidaUtilAnos: 8, garantiaMeses: 24, modoUso: "estimado", fatorUso: 0.8,
+        leituras: [], avaria: false },
+      { id: m4, nome: "Cross Over Duplo", tipo: "Musculação", marca: "Nexus Strength", modelo: "CO-2", serie: "",
+        dataCompra: daysAgo(900), valorPago: 18700, vidaUtilAnos: 10, garantiaMeses: 12, modoUso: "estimado", fatorUso: 0.55,
+        leituras: [], avaria: false },
+      { id: m5, nome: "Bike Spinning 03", tipo: "Bike", marca: "Spin Pro", modelo: "S3", serie: "",
+        dataCompra: daysAgo(300), valorPago: 4800, vidaUtilAnos: 6, garantiaMeses: 12, modoUso: "estimado", fatorUso: 0.35,
+        leituras: [], avaria: false },
+      { id: m6, nome: "Elíptico 01", tipo: "Elíptico", marca: "Movement", modelo: "E-500", serie: "",
+        dataCompra: daysAgo(200), valorPago: 16200, vidaUtilAnos: 8, garantiaMeses: 24, modoUso: "estimado", fatorUso: 0.4,
+        leituras: [], avaria: false },
+    ];
+
+    /* horasAtras = quantas horas de uso já passaram desde a última execução */
+    const r = (maquinaId, descricao, intervaloHoras, intervaloDias, custoEstimado, horasAtras, diasAtras) =>
+      ({ id: uid("rg"), maquinaId, descricao, intervaloHoras, intervaloDias, custoEstimado, horasAtras, ultimaExecData: daysAgo(diasAtras) });
+
+    const regras = [
+      r(m1, "Lubrificar lona e prancha", 150, 30, 120, 122, 14),
+      r(m1, "Verificar correia e alinhamento da lona", 500, 90, 180, 250, 30),
+      r(m1, "Revisão geral técnica (motor e placa)", 1500, 365, 650, 600, 75),
+      r(m2, "Lubrificar guias e trilhos", 200, 60, 90, 40, 12),
+      r(m2, "Verificar estofados, travas e parafusos", 400, 90, 60, 90, 25),
+      r(m3, "Lubrificar lona e prancha", 150, 30, 120, 175, 26),
+      r(m3, "Verificar correia e alinhamento da lona", 500, 90, 180, 300, 45),
+      r(m4, "Checar cabos de aço e polias", 300, 60, 80, 255, 52),
+      r(m4, "Trocar cabos de aço (peça de desgaste)", 2000, 730, 520, 900, 300),
+      r(m5, "Ajustar e lubrificar corrente", 250, 60, 70, 60, 20),
+      r(m5, "Trocar pastilha de freio", 600, 180, 110, 200, 70),
+      r(m6, "Limpeza e lubrificação de articulações", 300, 90, 90, 80, 30),
+    ];
+
+    const historico = [
+      { id: uid("hs"), maquinaId: m1, data: daysAgo(14), tipo: "Revisão preventiva", descricao: "Lubrificação de lona e prancha", custo: 120, responsavel: "TecFit Assistência", osId: null },
+      { id: uid("hs"), maquinaId: m4, data: daysAgo(52), tipo: "Revisão preventiva", descricao: "Checagem de cabos e polias", custo: 80, responsavel: "João (manutenção interna)", osId: null },
+      { id: uid("hs"), maquinaId: m3, data: daysAgo(95), tipo: "Conserto", descricao: "Troca do motor de inclinação após quebra", custo: 1850, responsavel: "TecFit Assistência", osId: null },
+      { id: uid("hs"), maquinaId: m1, data: daysAgo(75), tipo: "Revisão preventiva", descricao: "Revisão geral técnica", custo: 650, responsavel: "TecFit Assistência", osId: null },
+      { id: uid("hs"), maquinaId: m5, data: daysAgo(70), tipo: "Troca de peça", descricao: "Pastilha de freio", custo: 110, responsavel: "João (manutenção interna)", osId: null },
+      { id: uid("hs"), maquinaId: m2, data: daysAgo(12), tipo: "Revisão preventiva", descricao: "Lubrificação de guias", custo: 90, responsavel: "João (manutenção interna)", osId: null },
+    ];
+
+    const os = [
+      { id: uid("os"), numero: 1, maquinaId: m3, regraId: regras[5].id, tipo: "Preventiva", prioridade: "Alta",
+        descricao: "Lubrificar lona e prancha (revisão vencida)", responsavel: "TecFit Assistência",
+        abertaEm: daysAgo(1), prazo: daysAgo(-2), status: "Aberta", custo: 0, concluidaEm: null },
+    ];
+
+    return {
+      config: { horasDia: 15, diasSemana: 6, antecedenciaDias: 7, limiteProxima: 80, email: "", whatsapp: "" },
+      maquinas, regras, historico, os, proximaOS: 2,
+    };
   }
 
   function seedAccountData(academiaNome) {
@@ -40,13 +115,7 @@
       academia: academiaNome,
       plano: "Piloto — Feira de Ciências",
       createdAt: nowISO(),
-      equipamentos: [
-        { id: uid("eq"), nome: "Esteira 01", tipo: "Cardio", uso: 22, status: "ok", ultimaRevisao: "12/07/2026" },
-        { id: uid("eq"), nome: "Esteira 02", tipo: "Cardio", uso: 81, status: "alerta", ultimaRevisao: "02/05/2026" },
-        { id: uid("eq"), nome: "Bike ergométrica 04", tipo: "Cardio", uso: 47, status: "ok", ultimaRevisao: "19/06/2026" },
-        { id: uid("eq"), nome: "Elíptico 01", tipo: "Cardio", uso: 65, status: "ok", ultimaRevisao: "30/06/2026" },
-        { id: uid("eq"), nome: "Estação de musculação 03", tipo: "Força", uso: 9, status: "ok", ultimaRevisao: "01/08/2026" },
-      ],
+      capex: seedCapex(),
       hub: {
         academiasNoPedido: 12,
         insumos: [
@@ -72,11 +141,8 @@
     if (!nome || !academia || !email || !senha) {
       throw new Error("Preencha todos os campos.");
     }
-    if (senha.length < 6) {
-      throw new Error("A senha precisa ter pelo menos 6 caracteres.");
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      throw new Error("Informe um e-mail válido.");
+    if (senha.length < 4) {
+      throw new Error("A senha precisa ter pelo menos 4 caracteres.");
     }
     if (db.users.some((u) => u.email === email)) {
       throw new Error("Já existe uma conta cadastrada com esse e-mail.");
@@ -120,18 +186,13 @@
   }
 
   function setSession(userId) {
-    localStorage.setItem(SESSION_KEY, userId);
+    try { localStorage.setItem(SESSION_KEY, userId); } catch (e) {}
   }
   function getSession() {
-    return localStorage.getItem(SESSION_KEY);
+    try { return localStorage.getItem(SESSION_KEY); } catch (e) { return null; }
   }
   function logout() {
-    localStorage.removeItem(SESSION_KEY);
-  }
-
-  function redirectIfAuthenticated() {
-    const cur = getCurrent();
-    if (cur && cur.account) window.location.href = "dashboard.html";
+    try { localStorage.removeItem(SESSION_KEY); } catch (e) {}
   }
 
   function requireAuth() {
@@ -189,11 +250,11 @@
     loginDemo,
     logout,
     requireAuth,
-    redirectIfAuthenticated,
     getCurrent,
     updateAccount,
     updateUser,
     resetDemoData,
+    seedCapex,
     uid,
   };
 })(window);

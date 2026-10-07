@@ -3,12 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 17L9 9L13 14L21 4' stroke='%2335B891' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<title>Painel — Nexus Fitness</title>
-<meta name="description" content="Painel de manutenção preditiva e compras coletivas para academias.">
+<title>Painel do gestor — Nexus Fitness</title>
+<meta name="description" content="Painel de manutenção de máquinas (CAPEX Guard) e compras coletivas (Smart Buying) para academias.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="app.css">
 </head>
 <body>
@@ -16,37 +15,42 @@
 <div class="app-shell">
 
   <aside class="sidebar">
-    <div class="sidebar-logo">
-      <svg viewBox="0 0 24 24" width="19" height="19"><path d="M3 17L9 9L13 14L21 4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="21" cy="4" r="2.2" fill="currentColor"/></svg>
-      <span>NEXUS<em>FITNESS</em></span>
-    </div>
+    <a class="logo" href="dashboard.html" aria-label="Nexus Fitness">
+      <svg viewBox="0 0 64 40" width="64" height="40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="12" width="6" height="16" rx="2"/><rect x="11" y="6" width="7" height="28" rx="2"/><rect x="46" y="6" width="7" height="28" rx="2"/><rect x="54" y="12" width="6" height="16" rx="2"/><path d="M18 20h28"/><path d="M25 14l7 12 7-12" stroke-width="1.6"/></svg>
+      <span class="logo-text">NEXUS<small>FITNESS</small></span>
+    </a>
 
-    <nav class="sidebar-nav" id="sidebar-nav">
-      <div class="nav-item active" data-view="visao-geral">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.7"/><rect x="13" y="3" width="8" height="5" rx="1" stroke="currentColor" stroke-width="1.7"/><rect x="13" y="10" width="8" height="11" rx="1" stroke="currentColor" stroke-width="1.7"/><rect x="3" y="13" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.7"/></svg>
+    <nav class="sidebar-nav" aria-label="Menu principal">
+      <button class="nav-item active" data-view="visao-geral">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 11l9-7 9 7v9a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z"/></svg>
         <span>Visão geral</span>
-      </div>
-      <div class="nav-item" data-view="manutencao">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.7"/><path d="M12 8v4l3 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
-        <span>Manutenção preditiva</span>
-        <span class="nav-badge" id="badge-alertas" hidden>0</span>
-      </div>
-      <div class="nav-item" data-view="hub">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="8" cy="19" r="2" fill="currentColor"/><circle cx="18" cy="19" r="2" fill="currentColor"/><path d="M2 4h3l3 12h11l3-8.5H7" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linejoin="round"/></svg>
-        <span>Hub de suprimentos</span>
-      </div>
-      <div class="nav-item" data-view="equipamentos">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="7" width="18" height="10" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M7 7V5a2 2 0 012-2h6a2 2 0 012 2v2" stroke="currentColor" stroke-width="1.7"/></svg>
-        <span>Equipamentos</span>
-      </div>
-      <div class="nav-item" data-view="roi">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 19h16M7 16v-5M12 16V6M17 16v-8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
-        <span>Calculadora de ROI</span>
-      </div>
-      <div class="nav-item" data-view="configuracoes">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/><path d="M19 12a7 7 0 00-.13-1.36l2.03-1.58-2-3.46-2.39.96a7.03 7.03 0 00-2.35-1.36L13.8 3h-3.6l-.36 2.2a7.03 7.03 0 00-2.35 1.36l-2.39-.96-2 3.46 2.03 1.58A7 7 0 005 12c0 .46.05.91.13 1.36l-2.03 1.58 2 3.46 2.39-.96c.69.58 1.49 1.04 2.35 1.36L10.2 21h3.6l.36-2.2a7.03 7.03 0 002.35-1.36l2.39.96 2-3.46-2.03-1.58c.08-.45.13-.9.13-1.36z" stroke="currentColor" stroke-width="1.3" fill="none"/></svg>
+      </button>
+      <button class="nav-item" data-view="capex">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+        <span>CAPEX Guard</span>
+        <span class="nav-badge" id="badge-capex" hidden>0</span>
+      </button>
+      <button class="nav-item" data-view="maquinas">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <span>Parque de máquinas</span>
+      </button>
+      <button class="nav-item" data-view="os">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 10h6M9 14h6M9 18h3"/></svg>
+        <span>Ordens de serviço</span>
+        <span class="nav-badge orange" id="badge-os" hidden>0</span>
+      </button>
+      <button class="nav-item" data-view="historico">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19V5M4 19h16M8 15l4-4 3 3 5-6"/></svg>
+        <span>Histórico e custos</span>
+      </button>
+      <button class="nav-item" data-view="hub">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l3 12h11l3-8H7"/></svg>
+        <span>Smart Buying</span>
+      </button>
+      <button class="nav-item" data-view="configuracoes">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.8l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.8-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 01-4 0v-.1a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.8.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.8 1.7 1.7 0 00-1.5-1H3a2 2 0 010-4h.1a1.7 1.7 0 001.5-1.1 1.7 1.7 0 00-.3-1.8l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.8.3H9a1.7 1.7 0 001-1.5V3a2 2 0 014 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.8-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.8V9a1.7 1.7 0 001.5 1H21a2 2 0 010 4h-.1a1.7 1.7 0 00-1.5 1z"/></svg>
         <span>Configurações</span>
-      </div>
+      </button>
     </nav>
 
     <div class="sidebar-user">
@@ -54,227 +58,225 @@
         <div class="sidebar-user-name" id="sidebar-user-name">—</div>
         <div class="sidebar-user-academia" id="sidebar-user-academia">—</div>
       </div>
-      <button class="btn btn-ghost btn-sm btn-block" id="logout-btn">Sair</button>
+      <button class="btn btn-plain btn-sm btn-block" id="logout-btn">Sair</button>
     </div>
   </aside>
 
   <div class="main-scroll">
 
-    <div class="app-topbar">
-      <div>
-        <h1 id="topbar-title">Visão geral</h1>
-        <p class="app-topbar-sub" id="topbar-sub">Resumo da operação em tempo real</p>
+    <header class="topnav">
+      <nav class="topnav-links" aria-label="Atalhos">
+        <button data-view="visao-geral" class="active">Dashboard</button>
+        <button data-view="capex">CAPEX Guard</button>
+        <button data-view="hub">Smart Buying</button>
+        <button data-view="historico">Relatórios</button>
+        <button data-view="configuracoes">Configurações</button>
+      </nav>
+      <div class="topnav-user">
+        <span class="avatar" id="avatar">G</span>
+        <span id="topnav-user-name">Gestor</span>
       </div>
-      <div class="topbar-actions">
-        <select id="unit-select" class="unit-select" aria-label="Unidade"></select>
-        <button class="bell-btn" id="bell-btn" aria-label="Abrir central de notificações">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 17V11a6 6 0 1112 0v6l2 2H4l2-2zM10 21h4" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
-          <span class="bell-count" id="bell-count" hidden>0</span>
-        </button>
-        <div class="plan-chip" id="topbar-plan">Piloto — Feira de Ciências</div>
-      </div>
-    </div>
+    </header>
 
-    <div class="app-content">
+    <main class="app-content">
 
       <!-- ===================== VISÃO GERAL ===================== -->
-     <!-- ===================== VISÃO GERAL ===================== -->
-<section class="view-section active" id="view-visao-geral">
-
-  <div id="critical-banner"></div>
-
-  <div class="kpi-grid">
-    <div class="kpi-card">
-      <div class="kpi-label">Equipamentos monitorados</div>
-      <div class="kpi-value" id="kpi-equip-total">0</div>
-      <div class="kpi-note">frota ativa no painel</div>
-    </div>
-
-    <div class="kpi-card">
-      <div class="kpi-label">Alertas ativos</div>
-      <div class="kpi-value amber" id="kpi-alertas">0</div>
-      <div class="kpi-note">aguardando revisão preventiva</div>
-    </div>
-
-    <div class="kpi-card">
-      <div class="kpi-label">Economia acumulada</div>
-      <div class="kpi-value teal" id="kpi-economia">R$ 0</div>
-      <div class="kpi-note">consertos emergenciais evitados</div>
-    </div>
-
-    <div class="kpi-card">
-      <div class="kpi-label">Desconto atual do hub</div>
-      <div class="kpi-value teal" id="kpi-desconto">0%</div>
-      <div class="kpi-note" id="kpi-desconto-note">
-        — academias no pedido coletivo
-      </div>
-    </div>
-  </div>
-
-
-  <!-- ===================== GRÁFICOS PRINCIPAIS ===================== -->
-
-  <div class="two-col">
-
-    <!-- GRÁFICO DE USO -->
-    <div class="card chart-card">
-
-      <div class="card-head">
-        <div>
-          <h2>Uso estimado por equipamento</h2>
-          <p>
-            Quanto mais perto do topo, mais próximo da revisão preventiva
-          </p>
-        </div>
-      </div>
-
-      <div class="chart-container chart-container-usage">
-        <canvas id="chart-uso"></canvas>
-      </div>
-
-    </div>
-
-
-    <!-- GRÁFICO DE STATUS -->
-    <div class="card chart-card">
-
-      <div class="card-head">
-        <div>
-          <h2>Status da frota</h2>
-          <p>Proporção de equipamentos em alerta</p>
-        </div>
-      </div>
-
-      <div class="chart-container chart-container-status">
-        <canvas id="chart-status"></canvas>
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- ===================== GRÁFICO DE ECONOMIA ===================== -->
-
-  <div class="card chart-card">
-
-    <div class="card-head">
-      <div>
-        <h2>Economia por ciclo de compra</h2>
-        <p>
-          Valor economizado em cada pedido coletivo registrado no hub
-        </p>
-      </div>
-    </div>
-
-    <div class="chart-container chart-container-economia">
-      <canvas id="chart-economia"></canvas>
-    </div>
-
-  </div>
-
-
-  <!-- ===================== ALERTAS / HUB ===================== -->
-
-  <div class="two-col">
-
-    <div class="card">
-
-      <div class="card-head">
-        <div>
-          <h2>Alertas de manutenção</h2>
-          <p>
-            Equipamentos que atingiram a zona de revisão preventiva
-          </p>
+      <section class="view-section active" id="view-visao-geral">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">Dashboard do gestor — Nexus Fitness</h1>
+            <p class="page-sub" id="dash-sub">Resumo da manutenção das máquinas e das compras coletivas</p>
+          </div>
         </div>
 
-        <button
-          class="btn btn-ghost btn-sm"
-          data-goto="manutencao">
-          Ver módulo completo
-        </button>
-      </div>
-
-      <div
-        class="alert-list"
-        id="overview-alert-list">
-      </div>
-
-    </div>
-
-
-    <div class="card">
-
-      <div class="card-head">
-        <div>
-          <h2>Hub de suprimentos</h2>
-          <p>Pedido coletivo deste mês</p>
+        <div class="kpi-row">
+          <div class="card glow kpi-big">
+            <div class="kpi-label">Economia preventiva</div>
+            <div class="kpi-value" id="kpi-economia">R$ 0</div>
+            <div class="kpi-note">estimada com revisões feitas antes da quebra</div>
+          </div>
+          <div class="card glow kpi-big">
+            <div class="kpi-label">Poupança no Hub</div>
+            <div class="kpi-value" id="kpi-hub">R$ 0</div>
+            <div class="kpi-note">economia acumulada em compras coletivas</div>
+          </div>
+          <div class="kpi-mini-grid">
+            <div class="card kpi-mini"><span>Urgentes</span><b class="c-red" id="kpi-urgentes">0</b></div>
+            <div class="card kpi-mini"><span>Revisão próxima</span><b class="c-orange" id="kpi-proximas">0</b></div>
+            <div class="card kpi-mini"><span>Em dia</span><b class="c-green" id="kpi-emdia">0</b></div>
+            <div class="card kpi-mini"><span>OS abertas</span><b class="c-neon" id="kpi-os">0</b></div>
+          </div>
         </div>
 
-        <button
-          class="btn btn-ghost btn-sm"
-          data-goto="hub">
-          Ver módulo completo
-        </button>
-      </div>
-
-      <p style="font-size:0.85rem; margin-bottom:14px;">
-        Sua academia está agrupada com outras
-        <strong
-          id="overview-hub-count"
-          style="color:var(--text-primary)">
-          —
-        </strong>
-        unidades neste ciclo de compra.
-      </p>
-
-      <div class="hub-discount-summary">
-
-        <div
-          class="kpi-value teal"
-          id="overview-hub-discount"
-          style="font-size:1.8rem;">
-          0%
-        </div>
-
-        <p style="font-size:0.82rem;">
-          de economia média nos insumos deste mês
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-      <!-- ===================== MANUTENÇÃO PREDITIVA ===================== -->
-      <section class="view-section" id="view-manutencao">
-        <div class="card">
-          <div class="card-head">
-            <div>
-              <h2>Frota monitorada</h2>
-              <p>Simule o avanço de uso semanal e observe o algoritmo agendar revisões preventivas automaticamente.</p>
+        <div class="two-col" style="margin-bottom:20px">
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <h2>CAPEX GUARD — Manutenção de máquinas</h2>
+                <p>Cor do cartão: vermelho urgente, laranja revisão próxima, verde em dia</p>
+              </div>
+              <button class="btn btn-ghost btn-sm" data-new="maquina">+ Novo cadastro</button>
             </div>
+            <div class="machine-grid" id="overview-machines"></div>
           </div>
 
-          <div class="table-wrap">
-          <div class="eq-row eq-head">
-            <span>Equipamento</span>
-            <span class="col-tipo">Tipo</span>
-            <span>Uso estimado</span>
-            <span>Status</span>
-            <span class="col-revisao">Última revisão</span>
-            <span></span>
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <h2>SMART BUYING — Hub de compras coletivas</h2>
+                <p>Pedido coletivo deste mês</p>
+              </div>
+              <button class="btn btn-ghost btn-sm" data-goto="hub">Abrir hub</button>
+            </div>
+            <div class="hub-window">
+              <b>Janela do mês (insumos)</b>
+              <div class="meter"><i class="neon" id="ov-hub-bar" style="width:0%"></i></div>
+              <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text-2)">
+                <span>Academias no pedido: <b class="c-neon" id="ov-hub-count">0</b></span>
+                <span>Desconto: <b class="c-neon" id="ov-hub-discount">0%</b></span>
+              </div>
+            </div>
+            <div class="hub-compare" id="ov-hub-compare"></div>
+            <h3 style="font-size:14px;margin:20px 0 6px">Tabela de insumos</h3>
+            <div class="table-wrap" id="ov-hub-table"></div>
           </div>
-          <div id="eq-list"></div>
+        </div>
+
+        <div class="two-col">
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <h2>Alertas de revisão</h2>
+                <p>Avise o responsável pelo WhatsApp ou e-mail, ou abra uma OS</p>
+              </div>
+              <button class="btn btn-ghost btn-sm" data-goto="capex">Ver todos</button>
+            </div>
+            <div class="alert-list" id="overview-alerts"></div>
+          </div>
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <h2>Histórico recente</h2>
+                <p>Últimos consertos e revisões</p>
+              </div>
+              <button class="btn btn-ghost btn-sm" data-new="historico">+ Registrar</button>
+            </div>
+            <div class="table-wrap" id="overview-history"></div>
           </div>
         </div>
       </section>
 
-      <!-- ===================== HUB DE SUPRIMENTOS ===================== -->
+      <!-- ===================== CAPEX GUARD ===================== -->
+      <section class="view-section" id="view-capex">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">CAPEX Guard</h1>
+            <p class="page-sub">Avisa qual máquina precisa de revisão antes de quebrar e mostra quanto isso custa e economiza.</p>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn btn-ghost btn-sm" id="send-summary-wa">Resumo por WhatsApp</button>
+            <button class="btn btn-ghost btn-sm" id="send-summary-mail">Resumo por e-mail</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2>Alertas</h2>
+              <p id="capex-alert-sub">Revisões vencidas, próximas e máquinas com avaria</p>
+            </div>
+          </div>
+          <div class="alert-list" id="capex-alerts"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2>Regras de revisão</h2>
+              <p>Intervalos do manual do fabricante, por horas de uso e por tempo (o que vencer primeiro)</p>
+            </div>
+            <button class="btn btn-primary btn-sm" data-new="regra">+ Nova regra</button>
+          </div>
+          <div class="table-wrap" id="capex-rules"></div>
+        </div>
+      </section>
+
+      <!-- ===================== PARQUE DE MÁQUINAS ===================== -->
+      <section class="view-section" id="view-maquinas">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">Parque de máquinas</h1>
+            <p class="page-sub">Cadastro, uso, garantia e valor de cada equipamento</p>
+          </div>
+          <button class="btn btn-primary" data-new="maquina">+ Cadastrar máquina</button>
+        </div>
+        <div class="card">
+          <div class="table-wrap" id="machines-table"></div>
+        </div>
+        <p class="hint">Uso estimado: horas de funcionamento da academia × dias por semana × fator de movimento da máquina. Uso por contador: leitura do horímetro do painel da máquina.</p>
+      </section>
+
+      <!-- ===================== ORDENS DE SERVIÇO ===================== -->
+      <section class="view-section" id="view-os">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">Ordens de serviço</h1>
+            <p class="page-sub">Abra, acompanhe e conclua os serviços. Ao concluir, o custo vai para o histórico e a revisão é zerada.</p>
+          </div>
+          <button class="btn btn-primary" data-new="os">+ Nova OS</button>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <div><h2>Em aberto</h2></div>
+            <div style="display:flex;gap:6px" id="os-filter">
+              <button class="btn btn-ghost btn-sm" data-f="abertas">Abertas</button>
+              <button class="btn btn-plain btn-sm" data-f="todas">Todas</button>
+            </div>
+          </div>
+          <div class="table-wrap" id="os-table"></div>
+        </div>
+      </section>
+
+      <!-- ===================== HISTÓRICO E CUSTOS ===================== -->
+      <section class="view-section" id="view-historico">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">Histórico e custos</h1>
+            <p class="page-sub">Cada conserto e revisão, com quanto custou e quem fez</p>
+          </div>
+          <button class="btn btn-primary" data-new="historico">+ Registrar serviço</button>
+        </div>
+
+        <div class="kpi-row" id="cost-kpis"></div>
+
+        <div class="two-col" style="margin-bottom:20px">
+          <div class="card">
+            <div class="card-head"><div><h2>Custo de manutenção por máquina</h2><p>Preventiva x corretiva</p></div></div>
+            <div class="chart-box"><canvas id="chart-custos"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><div><h2>Economia do hub por ciclo</h2><p>Valor economizado em cada pedido coletivo</p></div></div>
+            <div class="chart-box"><canvas id="chart-economia"></canvas></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div><h2>Todos os registros</h2></div>
+            <select id="hist-filter" class="btn btn-plain btn-sm" aria-label="Filtrar por máquina"></select>
+          </div>
+          <div class="table-wrap" id="history-table"></div>
+        </div>
+      </section>
+
+      <!-- ===================== SMART BUYING ===================== -->
       <section class="view-section" id="view-hub">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">Smart Buying</h1>
+            <p class="page-sub">Compra coletiva de insumos a preço de atacado</p>
+          </div>
+        </div>
         <div class="two-col">
           <div class="card">
             <div class="card-head">
@@ -285,37 +287,28 @@
             </div>
 
             <div class="hub-slider-block">
-              <label for="hub-slider">Academias participando do pedido coletivo</label>
+              <label for="hub-slider" class="hint">Academias participando do pedido coletivo</label>
               <input type="range" id="hub-slider" min="1" max="40" value="12" step="1">
               <div class="hub-slider-value"><span id="hub-count">12</span> academias no ciclo atual</div>
             </div>
 
             <div class="card-head" style="margin-bottom:10px;">
               <div>
-                <h2 style="font-size:0.95rem;">Insumos do pedido</h2>
-                <p>Edite preços ou adicione novos itens à lista de compra coletiva</p>
+                <h2 style="font-size:14px;">Insumos do pedido</h2>
+                <p>Edite preços ou adicione novos itens</p>
               </div>
               <button class="btn btn-primary btn-sm" id="toggle-add-insumo">+ Adicionar insumo</button>
             </div>
 
             <form class="inline-form" id="add-insumo-form">
               <input type="text" id="new-insumo-nome" placeholder="Nome do insumo" required>
-              <input type="number" id="new-insumo-varejo" placeholder="Preço de varejo (R$)" min="0" step="0.01" required>
+              <input type="number" id="new-insumo-varejo" placeholder="Preço de varejo (R$)" min="0" step="1" required>
               <button type="submit" class="btn btn-primary btn-sm">Adicionar</button>
             </form>
 
-            <div class="table-wrap">
-            <div class="insumo-row insumo-head">
-              <span>Insumo</span>
-              <span>Varejo</span>
-              <span>Preço no hub</span>
-              <span>Economia</span>
-              <span></span>
-            </div>
-            <div id="insumo-list"></div>
-            </div>
+            <div class="table-wrap" id="insumo-list"></div>
 
-            <div style="margin-top:18px; display:flex; gap:12px;">
+            <div style="margin-top:18px;">
               <button class="btn btn-primary btn-sm" id="registrar-pedido-btn">Registrar pedido deste mês</button>
             </div>
           </div>
@@ -332,120 +325,71 @@
         </div>
       </section>
 
-      <!-- ===================== EQUIPAMENTOS (CRUD) ===================== -->
-      <section class="view-section" id="view-equipamentos">
-        <div class="card">
-          <div class="card-head">
-            <div>
-              <h2>Cadastro de equipamentos</h2>
-              <p>Adicione ou remova aparelhos monitorados pelo painel</p>
-            </div>
-            <button class="btn btn-primary btn-sm" id="toggle-add-eq">+ Adicionar equipamento</button>
-          </div>
-
-          <form class="inline-form" id="add-eq-form">
-            <input type="text" id="new-eq-nome" placeholder="Nome do equipamento" required>
-            <input type="text" id="new-eq-tipo" placeholder="Tipo (ex: Cardio, Força)" required>
-            <button type="submit" class="btn btn-primary btn-sm">Adicionar</button>
-          </form>
-
-          <div class="table-wrap">
-          <div class="eq-row eq-head">
-            <span>Equipamento</span>
-            <span class="col-tipo">Tipo</span>
-            <span>Uso estimado</span>
-            <span>Status</span>
-            <span class="col-revisao">Última revisão</span>
-            <span></span>
-          </div>
-          <div id="eq-crud-list"></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ===================== CALCULADORA DE ROI ===================== -->
-      <section class="view-section" id="view-roi">
-        <div class="two-col">
-          <div class="card">
-            <div class="card-head"><div><h2>Simule a economia da sua rede</h2><p>Informe o tamanho da operação e veja a projeção em 6 e 12 meses</p></div></div>
-            <div class="field"><label for="roi-eq">Equipamentos por academia</label><input type="number" id="roi-eq" min="1" value="40"></div>
-            <div class="field"><label for="roi-ac">Número de academias</label><input type="number" id="roi-ac" min="1" value="3"></div>
-            <div class="field"><label for="roi-gasto">Compra mensal de insumos por academia (R$)</label><input type="number" id="roi-gasto" min="0" value="4000"></div>
-            <p class="roi-note">Premissas ilustrativas: 0,6 quebras por equipamento ao ano; conserto de emergência de R$ 1.800; revisão preventiva custa 1/4 disso (o conserto reativo custa de 3 a 5 vezes mais); compra coletiva reduz 20% do gasto com insumos (faixa de 15% a 30%).</p>
-          </div>
-          <div class="card">
-            <div class="card-head"><div><h2>Projeção de economia</h2><p>Manutenção preventiva somada à compra coletiva</p></div></div>
-            <div class="roi-result">
-              <div><div class="kpi-label">Em 6 meses</div><div class="kpi-value teal" id="roi-6">R$ 0</div></div>
-              <div><div class="kpi-label">Em 12 meses</div><div class="kpi-value teal" id="roi-12">R$ 0</div></div>
-            </div>
-            <div class="history-item"><span>Manutenção preventiva (12 meses)</span><span class="econ" id="roi-manut">R$ 0</span></div>
-            <div class="history-item"><span>Compra coletiva (12 meses)</span><span class="econ" id="roi-compra">R$ 0</span></div>
-          </div>
-        </div>
-      </section>
-
       <!-- ===================== CONFIGURAÇÕES ===================== -->
       <section class="view-section" id="view-configuracoes">
-        <div class="card">
-          <div class="card-head">
-            <div>
-              <h2>Perfil da academia</h2>
-              <p>Informações usadas em todo o painel</p>
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">Configurações</h1>
+            <p class="page-sub">Dados da academia, cálculo de uso e canais de alerta</p>
+          </div>
+        </div>
+        <div class="two-col" style="margin-bottom:20px">
+          <div class="card">
+            <div class="card-head"><div><h2>Perfil da academia</h2></div></div>
+            <div class="field"><label for="cfg-academia">Nome da academia</label><input type="text" id="cfg-academia"></div>
+            <div class="field"><label for="cfg-nome">Seu nome</label><input type="text" id="cfg-nome"></div>
+            <div class="field"><label for="cfg-email">E-mail de login</label><input type="email" id="cfg-email" disabled></div>
+            <div class="field"><label>Plano atual</label><div><span class="plan-chip" id="cfg-plano">—</span></div></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><div><h2>CAPEX Guard</h2><p>Usado para estimar o uso das máquinas e disparar os alertas</p></div></div>
+            <div class="form-grid">
+              <div class="field"><label for="cfg-horas">Horas abertas por dia</label><input type="number" id="cfg-horas" min="1" max="24" step="0.5"></div>
+              <div class="field"><label for="cfg-dias">Dias abertos por semana</label><input type="number" id="cfg-dias" min="1" max="7" step="1"></div>
+              <div class="field"><label for="cfg-antecedencia">Avisar com quantos dias de antecedência</label><input type="number" id="cfg-antecedencia" min="1" max="60" step="1"></div>
+              <div class="field"><label for="cfg-limite">Avisar quando a revisão chegar a (%)</label><input type="number" id="cfg-limite" min="50" max="99" step="1"></div>
+            </div>
+            <div class="form-grid">
+              <div class="field"><label for="cfg-alert-email">E-mail que recebe os alertas</label><input type="email" id="cfg-alert-email" placeholder="manutencao@academia.com.br"></div>
+              <div class="field"><label for="cfg-alert-wa">WhatsApp que recebe os alertas</label><input type="tel" id="cfg-alert-wa" placeholder="(11) 99999-0000"><span class="hint">Com DDD. O código do Brasil (55) é colocado sozinho.</span></div>
             </div>
           </div>
-          <form class="settings-grid" id="settings-form">
-            <div class="field">
-              <label for="cfg-academia">Nome da academia</label>
-              <input type="text" id="cfg-academia">
-            </div>
-            <div class="field">
-              <label for="cfg-nome">Seu nome</label>
-              <input type="text" id="cfg-nome">
-            </div>
-            <div class="field">
-              <label for="cfg-email">E-mail</label>
-              <input type="email" id="cfg-email" disabled>
-            </div>
-            <div class="field">
-              <label>Plano atual</label>
-              <div class="plan-chip" id="cfg-plano">Piloto — Feira de Ciências</div>
-            </div>
-          </form>
-          <button class="btn btn-primary btn-sm" id="save-settings-btn">Salvar alterações</button>
         </div>
+        <button class="btn btn-primary" id="save-settings-btn" style="margin-bottom:20px">Salvar alterações</button>
 
         <div class="card">
-          <div class="card-head">
-            <div>
-              <h2>Zona de risco</h2>
-              <p>Ações irreversíveis nesta conta de demonstração</p>
-            </div>
-          </div>
-          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <div class="card-head"><div><h2>Seus dados</h2><p>Tudo fica salvo neste navegador. Exporte um backup para levar a outro computador.</p></div></div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn btn-ghost btn-sm" id="export-btn">Exportar backup (.json)</button>
+            <label class="btn btn-ghost btn-sm" for="import-file">Importar backup</label>
+            <input type="file" id="import-file" accept="application/json,.json" hidden>
             <button class="btn btn-danger btn-sm" id="reset-data-btn">Restaurar dados de demonstração</button>
-            <button class="btn btn-ghost btn-sm" id="logout-btn-2">Sair da conta</button>
+            <button class="btn btn-plain btn-sm" id="logout-btn-2">Sair da conta</button>
           </div>
         </div>
       </section>
 
-    </div>
+    </main>
   </div>
 </div>
 
-<div class="notif-overlay" id="notif-overlay" hidden></div>
-<aside class="notif-drawer" id="notif-drawer" aria-label="Central de notificações" aria-hidden="true">
-  <div class="notif-head">
-    <h2>Notificações</h2>
-    <div><button class="btn btn-ghost btn-sm" id="notif-read">Marcar como lidas</button><button class="btn btn-ghost btn-sm" id="notif-close" aria-label="Fechar">✕</button></div>
-  </div>
-  <div id="notif-list"></div>
-</aside>
+<div class="modal-backdrop" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <form class="modal" id="modal-form" novalidate>
+    <div class="modal-head">
+      <h2 id="modal-title">—</h2>
+      <button type="button" class="icon-btn" id="modal-close" aria-label="Fechar">✕</button>
+    </div>
+    <div class="form-error" id="modal-error" role="alert"></div>
+    <div id="modal-body"></div>
+    <div class="modal-foot" id="modal-foot"></div>
+  </form>
+</div>
 
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="toast" id="toast" role="status"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script src="auth.js"></script>
+<script src="capex.js"></script>
 <script src="dashboard.js"></script>
 </body>
 </html>

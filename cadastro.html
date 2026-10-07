@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 17L9 9L13 14L21 4' stroke='%2335B891' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <title>Criar conta — Nexus Fitness</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="app.css">
 </head>
 <body>
@@ -15,13 +14,13 @@
 <div class="auth-shell">
 
   <div class="auth-side">
-    <div class="auth-logo">
-      <svg viewBox="0 0 24 24" width="20" height="20"><path d="M3 17L9 9L13 14L21 4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="21" cy="4" r="2.2" fill="currentColor"/></svg>
-      <span>NEXUS<em>FITNESS</em></span>
-    </div>
+    <a class="logo" href="index.html" aria-label="Nexus Fitness">
+      <svg viewBox="0 0 64 40" width="56" height="35" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="12" width="6" height="16" rx="2"/><rect x="11" y="6" width="7" height="28" rx="2"/><rect x="46" y="6" width="7" height="28" rx="2"/><rect x="54" y="12" width="6" height="16" rx="2"/><path d="M18 20h28"/><path d="M25 14l7 12 7-12" stroke-width="1.6"/></svg>
+      <span class="logo-text">NEXUS<small>FITNESS</small></span>
+    </a>
 
     <div class="auth-pitch">
-      <h2>Comece a proteger o caixa da sua academia hoje.</h2>
+      <h2>Comece a proteger o <span>caixa</span> da sua academia hoje.</h2>
       <p>Crie sua conta e já entre com dados de exemplo carregados — pronto para explorar o painel.</p>
       <div class="auth-feature-list">
         <div class="auth-feature"><span class="dot"></span><span>Sem cartão de crédito — plano piloto gratuito</span></div>
@@ -56,7 +55,7 @@
       </div>
       <div class="field">
         <label for="senha">Senha</label>
-        <input type="password" id="senha" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
+        <input type="password" id="senha" placeholder="Mínimo 4 caracteres" autocomplete="new-password">
       </div>
       <div class="field">
         <label for="senha2">Confirmar senha</label>
@@ -73,7 +72,6 @@
 </div>
 
 <script src="auth.js"></script>
-<script>NexusAuth.redirectIfAuthenticated();</script>
 <script>
   const form = document.getElementById("signup-form");
   const errorBox = document.getElementById("form-error");
@@ -97,8 +95,8 @@
       showError("Preencha todos os campos.");
       return;
     }
-    if (senha.length < 6) {
-      showError("A senha precisa ter pelo menos 6 caracteres.");
+    if (senha.length < 4) {
+      showError("A senha precisa ter pelo menos 4 caracteres.");
       return;
     }
     if (senha !== senha2) {

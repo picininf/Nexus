@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 17L9 9L13 14L21 4' stroke='%2335B891' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<title>Entrar — Nexus Fitness</title>
+<title>Nexus Fitness — entrar</title>
+<meta name="description" content="Nexus Fitness: manutenção preditiva de máquinas (CAPEX Guard) e compras coletivas para academias.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="app.css">
 </head>
 <body>
@@ -15,91 +15,85 @@
 <div class="auth-shell">
 
   <div class="auth-side">
-    <div class="auth-logo">
-      <svg viewBox="0 0 24 24" width="20" height="20"><path d="M3 17L9 9L13 14L21 4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="21" cy="4" r="2.2" fill="currentColor"/></svg>
-      <span>NEXUS<em>FITNESS</em></span>
-    </div>
+    <a class="logo" href="index.html" aria-label="Nexus Fitness">
+      <svg viewBox="0 0 64 40" width="56" height="35" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="12" width="6" height="16" rx="2"/><rect x="11" y="6" width="7" height="28" rx="2"/><rect x="46" y="6" width="7" height="28" rx="2"/><rect x="54" y="12" width="6" height="16" rx="2"/><path d="M18 20h28"/><path d="M25 14l7 12 7-12" stroke-width="1.6"/></svg>
+      <span class="logo-text">NEXUS<small>FITNESS</small></span>
+    </a>
 
     <div class="auth-pitch">
-      <h2>O painel de controle dos bastidores da sua academia.</h2>
-      <p>Acesse sua central de manutenção preditiva e o hub de compras coletivas em um único lugar.</p>
+      <h2>Sua academia funcionando <span>antes</span> de a máquina quebrar.</h2>
+      <p>O CAPEX Guard avisa qual máquina precisa de revisão antes de quebrar e mostra quanto isso custa e economiza. O Smart Buying junta pedidos de várias academias para chegar ao preço de atacado.</p>
       <div class="auth-feature-list">
-        <div class="auth-feature"><span class="dot"></span><span>Monitoramento de uso e agendamento automático de revisões</span></div>
-        <div class="auth-feature"><span class="dot"></span><span>Compra coletiva de insumos com preço de atacado</span></div>
-        <div class="auth-feature"><span class="dot"></span><span>Alertas de estoque mínimo e histórico de economia</span></div>
+        <div class="auth-feature"><span class="dot"></span><span>Cadastro do parque de máquinas com garantia e vida útil</span></div>
+        <div class="auth-feature"><span class="dot"></span><span>Revisões pelo intervalo do fabricante, com alerta no painel, e-mail e WhatsApp</span></div>
+        <div class="auth-feature"><span class="dot"></span><span>Histórico de custos e ordens de serviço</span></div>
+        <div class="auth-feature"><span class="dot"></span><span>Compras coletivas de insumos</span></div>
       </div>
     </div>
 
-    <blockquote class="auth-quote">
-      "O Nexus Fitness não tenta vender mais mensalidade — ele garante que o dono pare de perder o dinheiro que já tem."
-    </blockquote>
+    <blockquote class="auth-quote">"Consertar depois da quebra custa de 3 a 5 vezes mais do que a manutenção preventiva."</blockquote>
   </div>
 
   <div class="auth-form-col">
     <form class="auth-form" id="login-form" novalidate>
-      <h1>Bem-vindo de volta</h1>
-      <p class="sub">Entre com sua conta para acessar o painel.</p>
+      <h1>Entrar</h1>
+      <p class="sub">Acesse o painel do gestor.</p>
 
       <div class="form-error" id="form-error" role="alert"></div>
 
       <div class="field">
         <label for="email">E-mail</label>
-        <input type="email" id="email" placeholder="voce@academia.com.br" autocomplete="email">
+        <input type="email" id="email" placeholder="voce@academia.com.br" autocomplete="username">
       </div>
       <div class="field">
         <label for="senha">Senha</label>
-        <input type="password" id="senha" placeholder="••••••••" autocomplete="current-password">
+        <input type="password" id="senha" placeholder="Sua senha" autocomplete="current-password">
       </div>
 
-      <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+      <button type="submit" class="btn btn-primary btn-block">Entrar no painel</button>
 
       <div class="auth-divider">ou</div>
+      <button type="button" class="btn btn-ghost btn-block" id="demo-btn">Entrar na demonstração</button>
 
-      <button type="button" class="btn btn-ghost btn-block" id="demo-btn">Entrar com conta de demonstração</button>
-
-      <p class="auth-foot">Ainda não tem conta? <a href="cadastro.html">Criar conta grátis</a></p>
-   
+      <p class="auth-foot">Não tem conta? <a href="cadastro.html">Criar conta</a></p>
+      <p class="hint" style="text-align:center;margin-top:10px">Os dados ficam salvos somente neste navegador.</p>
     </form>
   </div>
 
 </div>
 
 <script src="auth.js"></script>
-<script>NexusAuth.redirectIfAuthenticated();</script>
 <script>
-  const form = document.getElementById("login-form");
-  const errorBox = document.getElementById("form-error");
-
-  function showError(msg) {
-    errorBox.textContent = msg;
-    errorBox.classList.add("show");
-  }
-
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    errorBox.classList.remove("show");
-    const email = document.getElementById("email").value;
-    const senha = document.getElementById("senha").value;
-    if (!email || !senha) {
-      showError("Preencha e-mail e senha.");
+  (function () {
+    const cur = NexusAuth.getCurrent();
+    if (cur && cur.account) {
+      window.location.replace("dashboard.html");
       return;
     }
-    try {
-      NexusAuth.login({ email, senha });
-      window.location.href = "dashboard.html";
-    } catch (err) {
-      showError(err.message);
-    }
-  });
 
-  document.getElementById("demo-btn").addEventListener("click", function () {
-    try {
+    const form = document.getElementById("login-form");
+    const errorBox = document.getElementById("form-error");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      errorBox.classList.remove("show");
+      try {
+        NexusAuth.login({
+          email: document.getElementById("email").value,
+          senha: document.getElementById("senha").value,
+        });
+        window.location.href = "dashboard.html";
+      } catch (err) {
+        errorBox.textContent = err.message;
+        errorBox.classList.add("show");
+      }
+    });
+
+    document.getElementById("demo-btn").addEventListener("click", function () {
       NexusAuth.loginDemo();
       window.location.href = "dashboard.html";
-    } catch (err) {
-      showError(err.message);
-    }
-  });
+    });
+  })();
 </script>
 </body>
 </html>
